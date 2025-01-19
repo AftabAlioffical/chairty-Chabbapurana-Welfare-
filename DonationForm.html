@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donation Form</title>
+    <link rel="stylesheet" href="form/style.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="logo-container">
+            <img src="form/logo_imax.jpeg" alt="" class="logo">
+        </div>
+        <h2>Chabbapurana Welfare and Society</h2>
+        <h3>Donate Now</h3>
+            <p>"Donate easily via Easypaisa or JazzCash to Hamza Ur Rehman at 03055062001. After your donation, kindly submit your details here."</p>
+        <form id="donationForm" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="username">Full Name</label>
+                <input type="text" id="username" name="username" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number</label>
+                <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" pattern="[0-9]{10}" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Enter Donation Amount (Rs)</label>
+                <input type="number" id="amount" name="amount" placeholder="Enter amount in Rs." min="1" required>
+            </div>
+            <div class="form-group">
+                <label for="receipt">Upload Receipt</label>
+                <input type="file" id="receipt" name="receipt" accept="image/*" required>
+            </div>
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById("donationForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const username = document.getElementById("username").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const contact = document.getElementById("contact").value.trim();
+            const amount = document.getElementById("amount").value.trim();
+            const receipt = document.getElementById("receipt").files[0];
+
+            if (!username || !email || !contact || !amount || !receipt) {
+                alert("All fields are required.");
+                return;
+            }
+
+            if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            if (!/^\d{10}$/.test(contact)) {
+                alert("Please enter a valid 10-digit contact number.");
+                return;
+            }
+
+            if (amount <= 0) {
+                alert("Please enter a valid donation amount greater than 0.");
+                return;
+            }
+
+            // Replace the form with a thank-you message
+            const formContainer = document.querySelector(".form-container");
+            formContainer.innerHTML = `
+                <h2>Thank You!</h2>
+                <p>Dear <strong>${username}</strong>, thank you for your generous donation of ₹${amount}!</p>
+                <p>We have received your details and will contact you shortly if necessary.</p>
+                <p>If you have any further questions, feel free to <a href="mailto:${email}">reach out to us</a>.</p>
+            `;
+        });
+    </script>
+</body>
+</html>
