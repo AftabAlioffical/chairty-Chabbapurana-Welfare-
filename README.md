@@ -1,0 +1,1 @@
+This project, under chabbapuranawelfare administration, strives to be a beacon of hope and progress for the Chabbapurana (sargodha) region, aligning with its values of inclusivity, compassion, and sustainable development
